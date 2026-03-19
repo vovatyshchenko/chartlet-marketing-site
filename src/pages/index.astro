@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import LiveDemo from '../components/LiveDemo.astro';
+import FeaturesGrid from '../components/FeaturesGrid.astro';
+import CodeSnippet from '../components/CodeSnippet.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import PricingWaitlist from '../components/PricingWaitlist.astro';
+import AnimatedSection from '../components/AnimatedSection.tsx';
+---
+
+<BaseLayout>
+  <main id="main-content">
+    <AnimatedSection client:visible>
+      <Hero />
+    </AnimatedSection>
+    <LiveDemo />
+    <FeaturesGrid />
+    <CodeSnippet />
+    <ComparisonTable />
+    <PricingWaitlist />
+  </main>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+/**
+ * JSON-LD structured data (Schema.org) for SoftwareApplication.
+ * Critical for AI search / SGE and rich results in 2026.
+ */
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Chartlet',
+  operatingSystem: 'WordPress',
+  applicationCategory: 'BusinessApplication, ChartingTool',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  description:
+    'Lightweight WordPress chart builder with zero database overhead. Create Bar, Line, and Pie charts via shortcodes instantly.',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    reviewCount: '1',
+  },
+  featureList: [
+    'No database overhead',
+    'Chart.js integration',
+    'Responsive design',
+    'Shortcode generator',
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

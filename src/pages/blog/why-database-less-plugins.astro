@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Why Database-less plugins are the future of WordPress performance';
+const description = 'WordPress plugins that avoid the database for content and configuration deliver faster sites, simpler backups, and better scalability. Here\'s why database-less design wins.';
+---
+
+<BaseLayout title={title} description={description} canonicalUrl="https://chartletwp.com/blog/why-database-less-plugins">
+  <main id="main-content" class="mx-auto max-w-3xl px-6 py-12">
+    <article class="prose prose-invert max-w-none">
+      <header>
+        <h1 class="text-3xl font-bold text-white sm:text-4xl">{title}</h1>
+        <p class="mt-2 text-slate-500 text-sm">Blog</p>
+      </header>
+
+      <div class="mt-8 space-y-6 text-slate-400">
+        <p>
+          Most WordPress plugins lean on the database for everything: settings, cached data, logs, and sometimes even the content they display. Each new table and row adds queries, backup size, and complexity. Database-less plugins take a different path: they store nothing in custom tables and keep configuration or content where it already lives—in options, in post content, or in files.
+        </p>
+        <p>
+          The benefits are real. <strong class="text-slate-300">Fewer queries</strong> mean faster page loads. <strong class="text-slate-300">Smaller backups</strong> and easier migrations. <strong class="text-slate-300">No orphaned meta or broken serialized data</strong>. And for plugins that only need to render something—like a chart—putting the data in the post itself (e.g. inside a shortcode) keeps the system simple and portable.
+        </p>
+        <p>
+          Chartlet is built this way: zero extra tables, zero new database writes. The chart data lives in your content. When you’re ready to move or clone the site, there’s nothing to sync. That’s the future of WordPress performance—less database, more clarity.
+        </p>
+      </div>
+
+      <p class="mt-12">
+        <a href="/" class="text-accent-cyan hover:underline">← Back to Chartlet</a>
+      </p>
+    </article>
+  </main>
+</BaseLayout>

@@ -1,0 +1,64 @@
+---
+import SEO from './SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Canonical URL (default: site + current path) */
+  canonicalUrl?: string;
+  /** OG/Twitter image (default: /banner-1544x500.png) */
+  ogImage?: string;
+}
+
+const { title = 'Chartlet — Beautiful Charts without the Bloat', description = 'The fastest way to add charts to WordPress. Zero database bloat, GDPR-ready, and ultra-lightweight. Try Chartlet today.', keywords = 'wordpress charts, lightweight graph plugin, chart.js wordpress, no database charts, wordpress shortcode graph', canonicalUrl, ogImage = '/banner-1544x500.png' } = Astro.props;
+const site = 'https://chartletwp.com';
+const url = canonicalUrl ?? `${site}${Astro.url.pathname.replace(/\/?$/, '') || '/'}`;
+const image = ogImage.startsWith('http') ? ogImage : `${site}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+const twitterCard = 'summary_large_image';
+const analyticsId = import.meta.env.PUBLIC_ANALYTICS_ID;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <SEO />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="wordpress charts, lightweight graph plugin, chart.js wordpress, no database charts, wordpress shortcode graph">
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="preload" href="/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={image} />
+    <meta property="twitter:card" content={twitterCard} />
+    <meta property="twitter:url" content={url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+    <link rel="canonical" href={url} />
+    {analyticsId && (
+      <script
+        defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id={analyticsId}
+      />
+    )}
+  </head>
+  <body class="min-h-screen bg-deep-900 text-slate-200 font-display antialiased flex flex-col">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-accent-cyan focus:px-4 focus:py-2 focus:text-deep-900 focus:outline-none">Skip to main content</a>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

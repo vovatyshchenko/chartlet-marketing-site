@@ -1,0 +1,106 @@
+---
+import { blogPosts } from '../data/posts';
+const currentPath = Astro.url.pathname;
+const isDocs = currentPath.startsWith('/docs');
+const isBlog = currentPath.startsWith('/blog');
+const isChangelog = currentPath === '/changelog';
+const isPro = currentPath === '/pro';
+import { Menu, X } from '@lucide/astro';
+---
+
+<header class="border-b border-slate-800/50 bg-deep-900/80 backdrop-blur-sm sticky top-0 z-40">
+  <input type="checkbox" id="nav-toggle" class="peer sr-only" aria-hidden="true" aria-controls="mobile-nav" />
+  <div class="header-bar mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
+    <a href="/" class="font-semibold text-white transition hover:text-accent-cyan">Chartlet</a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:block" aria-label="Main">
+      <ul class="flex items-center gap-1 sm:gap-6">
+        <li>
+          <a href="/" class:list={['inline-block px-3 py-2 text-sm rounded-md transition', currentPath === '/' ? 'text-accent-cyan font-medium' : 'text-slate-400 hover:text-white']}>Home</a>
+        </li>
+        <li class="relative group">
+          <a href="/docs" class:list={['inline-block px-3 py-2 text-sm rounded-md transition', isDocs ? 'text-accent-cyan font-medium' : 'text-slate-400 hover:text-white']}>Docs</a>
+          <ul class="absolute left-0 top-full pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all bg-deep-800 border border-slate-700/50 rounded-lg shadow-xl min-w-[180px]" aria-label="Docs submenu">
+            <li><a href="/docs" class="block px-4 py-2 text-sm text-slate-300 hover:bg-deep-700 hover:text-white rounded-t-lg">Overview</a></li>
+            <li><a href="/docs/bar-chart" class="block px-4 py-2 text-sm text-slate-300 hover:bg-deep-700 hover:text-white">Bar chart</a></li>
+            <li><a href="/docs/line-chart" class="block px-4 py-2 text-sm text-slate-300 hover:bg-deep-700 hover:text-white">Line chart</a></li>
+            <li><a href="/docs/pie-doughnut-chart" class="block px-4 py-2 text-sm text-slate-300 hover:bg-deep-700 hover:text-white rounded-b-lg">Pie & Doughnut</a></li>
+          </ul>
+        </li>
+        <li class="relative group">
+          <a href="/blog" class:list={['inline-block px-3 py-2 text-sm rounded-md transition', isBlog ? 'text-accent-cyan font-medium' : 'text-slate-400 hover:text-white']}>Blog</a>
+          <ul class="absolute left-0 top-full pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all bg-deep-800 border border-slate-700/50 rounded-lg shadow-xl min-w-[220px]" aria-label="Blog submenu">
+            <li><a href="/blog" class="block px-4 py-2 text-sm text-slate-300 hover:bg-deep-700 hover:text-white rounded-t-lg">Overview</a></li>
+            {blogPosts.map((post, i) => (
+              <li><a href={`/blog/${post.slug}`} class:list={['block px-4 py-2 text-sm text-slate-300 hover:bg-deep-700 hover:text-white', i === blogPosts.length - 1 && 'rounded-b-lg']}>{post.title.length > 32 ? post.title.slice(0, 29) + '…' : post.title}</a></li>
+            ))}
+          </ul>
+        </li>
+        <li>
+          <a href="/changelog" class:list={['inline-block px-3 py-2 text-sm rounded-md transition', isChangelog ? 'text-accent-cyan font-medium' : 'text-slate-400 hover:text-white']}>Changelog</a>
+        </li>
+        <li>
+          <a href="/pro" class:list={['inline-block px-3 py-2 text-sm rounded-md transition', isPro ? 'text-accent-cyan font-medium' : 'text-slate-400 hover:text-white']}>Pro</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Mobile: hamburger / close -->
+    <label for="nav-toggle" class="flex md:hidden cursor-pointer rounded-lg p-2 text-slate-400 hover:bg-deep-700 hover:text-white transition" aria-label="Toggle menu">
+      <Menu size={24} strokeWidth={2} class="icon-menu block" />
+      <X size={24} strokeWidth={2} class="icon-close hidden" />
+    </label>
+  </div>
+
+  <!-- Mobile: slide-down menu (sibling of input for peer-checked) -->
+  <div id="mobile-nav" class="max-h-0 overflow-hidden transition-[max-height] duration-300 ease-out peer-checked:max-h-[80vh] md:max-h-none md:overflow-visible border-t border-slate-800/50 md:border-t-0">
+    <nav class="bg-deep-900 px-6 py-4 md:hidden" aria-label="Main">
+      <ul class="flex flex-col gap-1">
+        <li><a href="/" class:list={['block rounded-lg px-4 py-3 text-slate-300 hover:bg-deep-700 hover:text-white transition', currentPath === '/' && 'bg-deep-700 text-accent-cyan']}>Home</a></li>
+        <li>
+          <span class="block px-4 py-2 text-xs font-medium uppercase tracking-wider text-slate-500">Docs</span>
+          <ul class="mt-1 space-y-0.5" aria-label="Docs submenu">
+            <li><a href="/docs" class="block rounded-lg px-4 py-3 text-slate-300 hover:bg-deep-700 hover:text-white transition">Overview</a></li>
+            <li><a href="/docs/bar-chart" class="block rounded-lg px-4 py-3 text-slate-300 hover:bg-deep-700 hover:text-white transition">Bar chart</a></li>
+            <li><a href="/docs/line-chart" class="block rounded-lg px-4 py-3 text-slate-300 hover:bg-deep-700 hover:text-white transition">Line chart</a></li>
+            <li><a href="/docs/pie-doughnut-chart" class="block rounded-lg px-4 py-3 text-slate-300 hover:bg-deep-700 hover:text-white transition">Pie & Doughnut</a></li>
+          </ul>
+        </li>
+        <li>
+          <span class="block px-4 py-2 text-xs font-medium uppercase tracking-wider text-slate-500">Blog</span>
+          <ul class="mt-1 space-y-0.5" aria-label="Blog submenu">
+            <li><a href="/blog" class="block rounded-lg px-4 py-3 text-slate-300 hover:bg-deep-700 hover:text-white transition">Overview</a></li>
+            {blogPosts.map((post) => (
+              <li><a href={`/blog/${post.slug}`} class="block rounded-lg px-4 py-3 text-slate-300 hover:bg-deep-700 hover:text-white transition">{post.title}</a></li>
+            ))}
+          </ul>
+        </li>
+        <li><a href="/changelog" class:list={['block rounded-lg px-4 py-3 text-slate-300 hover:bg-deep-700 hover:text-white transition', isChangelog && 'bg-deep-700 text-accent-cyan']}>Changelog</a></li>
+        <li><a href="/pro" class:list={['block rounded-lg px-4 py-3 text-slate-300 hover:bg-deep-700 hover:text-white transition', isPro && 'bg-deep-700 text-accent-cyan']}>Pro</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style is:global>
+  #nav-toggle:checked ~ .header-bar .icon-menu { display: none; }
+  #nav-toggle:checked ~ .header-bar .icon-close { display: block !important; }
+  @media (max-width: 767px) {
+    body.mobile-menu-open { overflow: hidden; }
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    var toggle = document.getElementById('nav-toggle');
+    if (!toggle) return;
+    function sync() {
+      document.body.classList.toggle('mobile-menu-open', toggle.checked);
+    }
+    toggle.addEventListener('change', sync);
+    document.getElementById('mobile-nav')?.addEventListener('click', function(e) {
+      if (e.target.closest('a')) { toggle.checked = false; sync(); }
+    });
+  })();
+</script>

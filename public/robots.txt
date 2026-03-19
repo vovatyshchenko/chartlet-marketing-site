@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chartletwp.com/sitemap-index.xml
