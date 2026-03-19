@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = 'Terms of Service – Chartlet';
+const siteEmail = import.meta.env.SITE_EMAIL ?? '';
 const description = 'Terms of use for Chartlet plugin and chartletwp.com website.';
 ---
 
@@ -39,7 +40,7 @@ const description = 'Terms of use for Chartlet plugin and chartletwp.com website
       </p>
       <h2 class="text-xl font-semibold text-white mt-10">Contact</h2>
       <p>
-        For questions about these terms, email us at <a href="mailto:hello@chartletwp.com" class="text-accent-cyan hover:underline">hello@chartletwp.com</a>.
+        For questions about these terms, email us at <a href={`mailto:${siteEmail}`} class="text-accent-cyan hover:underline">{siteEmail}</a>.
       </p>
     </div>
     <p class="mt-12">

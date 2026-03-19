@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_DOWNLOAD_URL?: string;
   readonly PUBLIC_PRO_EXPLORE_URL?: string;
   readonly PUBLIC_NETLIFY_FORM_NAME?: string;
+  readonly SITE_EMAIL?: string;
 }
 
 interface ImportMeta {
