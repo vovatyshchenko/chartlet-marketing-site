@@ -1,13 +1,20 @@
 ---
 const year = new Date().getFullYear();
+const siteEmail = import.meta.env.SITE_EMAIL ?? 'hello@chartletwp.com';
 ---
 
 <footer class="border-t border-slate-800/50 bg-deep-950 mt-auto">
   <div class="mx-auto max-w-6xl px-6 py-8">
-    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-      <p class="text-sm text-slate-500">
-        © {year} Chartlet. Charts without the bloat.
-      </p>
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+      <div>
+        <p class="text-sm text-slate-500">
+          © {year} Chartlet. Charts without the bloat.
+        </p>
+        <p class="mt-3 text-sm text-slate-500">
+          Contact: <a href={`mailto:${siteEmail}`} class="text-slate-400 transition hover:text-white">{siteEmail}</a>
+        </p>
+      </div>
+
       <ul class="flex flex-wrap items-center gap-4 text-sm sm:gap-6">
         <li><a href="/" class="text-slate-400 transition hover:text-white">Home</a></li>
         <li><a href="/docs" class="text-slate-400 transition hover:text-white">Docs</a></li>
