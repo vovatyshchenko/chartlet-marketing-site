@@ -10,9 +10,11 @@ interface Props {
   canonicalUrl?: string;
   /** OG/Twitter image (default: /banner-1544x500.png) */
   ogImage?: string;
+  /** Exclude page from search indexing */
+  noindex?: boolean;
 }
 
-const { title = 'Chartlet — Beautiful Charts without the Bloat', description = 'The fastest way to add charts to WordPress. Zero database bloat, GDPR-ready, and ultra-lightweight. Try Chartlet today.', keywords = 'wordpress charts, lightweight graph plugin, chart.js wordpress, no database charts, wordpress shortcode graph', canonicalUrl, ogImage = '/banner-1544x500.png' } = Astro.props;
+const { title = 'Chartlet — Beautiful Charts without the Bloat', description = 'The fastest way to add charts to WordPress. Zero database bloat, GDPR-ready, and ultra-lightweight. Try Chartlet today.', keywords = 'wordpress charts, lightweight graph plugin, chart.js wordpress, no database charts, wordpress shortcode graph', canonicalUrl, ogImage = '/banner-1544x500.png', noindex = false } = Astro.props;
 const site = 'https://chartletwp.com';
 const url = canonicalUrl ?? `${site}${Astro.url.pathname.replace(/\/?$/, '') || '/'}`;
 const image = ogImage.startsWith('http') ? ogImage : `${site}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
@@ -43,6 +45,7 @@ const analyticsId = import.meta.env.PUBLIC_ANALYTICS_ID;
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
     <link rel="canonical" href={url} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     {analyticsId && (
       <script
         defer

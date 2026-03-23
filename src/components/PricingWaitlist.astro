@@ -1,6 +1,5 @@
 ---
 const formName = import.meta.env.PUBLIC_NETLIFY_FORM_NAME ?? 'waitlist';
-const isSuccess = Astro.url.searchParams.get('success') === '1';
 ---
 
 <section class="px-6 py-16 sm:py-24" aria-labelledby="pricing-heading">
@@ -12,18 +11,13 @@ const isSuccess = Astro.url.searchParams.get('success') === '1';
       More chart types, more options. Join the waitlist and we’ll notify you at launch.
     </p>
     <div class="mt-14 rounded-2xl border border-slate-700/50 bg-deep-800/50 p-8 shadow-xl">
-      {isSuccess && (
-        <p class="mb-6 rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 px-4 py-3 text-accent-cyan" role="status">
-          Thanks! You’re on the list. We’ll be in touch.
-        </p>
-      )}
       <h3 class="text-xl font-semibold text-white">Join the waitlist</h3>
       <form
         name={formName}
         method="POST"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
-        action="/?success=1"
+        action="/success"
         class="mt-6 space-y-4"
       >
         <input type="hidden" name="form-name" value={formName} />
