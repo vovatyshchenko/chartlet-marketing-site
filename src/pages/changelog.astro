@@ -6,6 +6,18 @@ const description = 'Chartlet plugin and website update log. Version history and
 
 const entries = [
   {
+    version: '1.1.0',
+    date: '2026-04-15',
+    notes: [
+      'Added native Gutenberg block (chartlet/chart) with live server-side preview in the editor.',
+      'Added 4 new chart types: Radar, Polar area, Scatter, and Bubble (8 total).',
+      'Scatter data format: x:y pairs (e.g. 1:5, 2:10).',
+      'Bubble data format: x:y:radius triples (e.g. 1:5:3, 2:10:5).',
+      'Labels field is hidden in the block editor for Scatter and Bubble types.',
+      'Fixed double JSON encoding in renderer.',
+    ],
+  },
+  {
     version: '1.0.1',
     date: '2026-03-19',
     notes: [
@@ -14,7 +26,14 @@ const entries = [
       'Corrected readme contributors username.',
     ],
   },
-  { version: '1.0.0', date: '2026-03-07', notes: ['Initial release. Bar and line charts via shortcode.', 'Zero database overhead. Chart.js integration.'] },
+  {
+    version: '1.0.0',
+    date: '2026-03-07',
+    notes: [
+      'Initial release. Bar and line charts via shortcode.',
+      'Zero database overhead. Chart.js integration.',
+    ],
+  },
 ];
 ---
 
